@@ -1,9 +1,9 @@
-/****************************************
- *                Integrantes
+/**
+ *            Integrantes:
  * Samuel Galindo - 2177491
  *
  *
- *
+ * Kevin Velez - 2123281
  */
 import scala.util.Random
 package object finca
