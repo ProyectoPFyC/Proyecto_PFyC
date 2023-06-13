@@ -98,3 +98,12 @@ package object finca
       Vector.tabulate(pi.length)(i => calcularTR(parejaOrden(i)._2))
     }
 }
+  def costoRiegoTablon(i: Int, f: Finca, pi: ProgRiego): Int = {
+    val tiempoInicioRiego = tIR(f, pi) // Calcula el tiempo de inicio de riego para cada tablón según la programación pi
+    val tiempoRiego = treg(f, i) // Tiempo que lleva regar el tablón i
+    val prioridad = prio(f, i) // Prioridad del tablón i
+
+    // Calcula el costo de regar el tablón i
+    val costo = tiempoInicioRiego(i) + tiempoRiego * prioridad
+    costo
+  }
