@@ -98,7 +98,7 @@ package object finca
       Vector.tabulate(pi.length)(i => calcularTR(parejaOrden(i)._2))
     }
 }
- def costoRiegoTablon(i: Int, f: Finca, pi: ProgRiego): Int = {
+  def costoRiegoTablon(i: Int, f: Finca, pi: ProgRiego): Int = {
     val tiempoInicioRiego = tIR(f, pi) // Calcula el tiempo de inicio de riego para cada tablón según la programación pi
     val tiempoRiego = treg(f, i) // Tiempo que lleva regar el tablón i
     val prioridad = prio(f, i) // Prioridad del tablón i
@@ -113,14 +113,23 @@ package object finca
     val tiempoInicioRiego = tIR(f, pi) // Calcula el tiempo de inicio de riego para cada tablón según la programación pi
 
     // Utiliza foldLeft para iterar sobre los índices de los tablones y acumular el costo de riego
+    f.indices.foldLeft(0) { (acc, i) => acc + costoRiegoTablon(i, f, pi) }
+  }
+
+  def costoMovilidad(f: Finca, pi: ProgRiego, d: Distancia): Int = {
+    val tiempoInicioRiego = tIR(f, pi) // Calcula el tiempo de inicio de riego para cada tablón según la programación pi
+
+    // Utiliza foldLeft para iterar sobre los índices de los tablones y acumular el costo de movilidad
     f.indices.foldLeft(0) { (acc, i) =>
-      acc + costoRiegoTablon(i, f, pi) // Acumula el costo total sumando el costo de riego de cada tablón
+      val costoRiego = costoRiegoTablon(i, f, pi) // Calcula el costo de riego del tablón i
+      val costoMovilidad = tiempoInicioRiego(i) * d(i).sum // Calcula el costo de movilidad del tablón i según la matriz de distancias
+      acc + costoRiego + costoMovilidad // Acumula el costo total sumando el costo de riego y el costo de movilidad
     }
   }
 
   def generarProgramacionesRiego(f: Finca): Vector[ProgRiego] = {
     val n = f.length // Tamaño de la finca
-
+     distanciaAlAzar(n)
     // Función auxiliar recursiva para generar todas las permutaciones
     def generarPermutaciones(acc: Vector[ProgRiego], disponibles: Vector[Int], parcial: ProgRiego): Vector[ProgRiego] = {
       if (disponibles.isEmpty) {
@@ -138,11 +147,16 @@ package object finca
     generarPermutaciones(Vector.empty, disponibles, Vector.empty) // Llamada inicial a la función auxiliar
   }
 
+
+
   def ProgramacionRiegoOptimo(f: Finca, d: Distancia): (ProgRiego, Int) = {
-    val programaciones = generarProgramacionesRiego(f) // Generar todas las programaciones posibles
+    val fincaAleatoria = fincaAlAzar(f.length) // Generar una finca aleatoria de tamaño igual a la finca original
+    val programaciones = generarProgramacionesRiego(fincaAleatoria) // Generar todas las programaciones posibles para la finca aleatoria
     val resultados = programaciones.map { pi =>
-      val costoMov = costoMovilidad(f, pi, d) // Calcular el costo de movilidad para la programación pi
-      (pi, costoMov) // Retornar la programación pi junto con su costo de movilidad
+      val costoRiego = costoRiegoFinca(fincaAleatoria, pi) // Calcular el costo de riego para la programación pi en la finca aleatoria
+      val costoMov = costoMovilidad(fincaAleatoria, pi, d) // Calcular el costo de movilidad para la programación pi en la finca aleatoria
+      (pi, costoRiego + costoMov) // Retornar la programación pi junto con su costo total en la finca aleatoria
     }
-    resultados.minBy(_._2) // Retornar la programación con el menor costo de movilidad
+    resultados.minBy(_._2) // Retornar la programación con el menor costo total (costo de riego + costo de movilidad) en la finca aleatoria
   }
+}
