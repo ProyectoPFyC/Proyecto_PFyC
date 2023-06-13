@@ -82,4 +82,19 @@ package object finca
   def prio(f: Finca, i: Int): Int = {
     f(i)._3
   }
+
+  def tIR(f: Finca, pi: ProgRiego): TiempolnicioRiego =
+    {
+      def calcularTR(par:Int): Int = {
+        if (par == 0) {
+          0
+        }
+        else {
+          treg(f,pi(par-1)) + calcularTR(par-1)
+        }
+      }
+
+      val parejaOrden = pi.zip(0 until pi.length).sortBy(_._1)
+      Vector.tabulate(pi.length)(i => calcularTR(parejaOrden(i)._2))
+    }
 }
