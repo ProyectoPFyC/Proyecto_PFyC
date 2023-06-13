@@ -107,3 +107,10 @@ package object finca
     val costo = tiempoInicioRiego(i) + tiempoRiego * prioridad
     costo
   }
+
+def costoRiegoFinca(f: Finca, pi: ProgRiego): Int = {
+  val tiempoInicioRiego = tIR(f, pi) // Calcula el tiempo de inicio de riego para cada tablón según la programación pi
+  
+  // Utiliza foldLeft para iterar sobre los índices de los tablones y acumular el costo de riego
+  f.indices.foldLeft(0) { (acc, i) => acc + costoRiegoTablon(i, f, pi) }
+}
