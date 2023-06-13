@@ -98,13 +98,14 @@ package object finca
       Vector.tabulate(pi.length)(i => calcularTR(parejaOrden(i)._2))
     }
 }
-  def costoRiegoTablon(i: Int, f: Finca, pi: ProgRiego): Int = {
+ def costoRiegoTablon(i: Int, f: Finca, pi: ProgRiego): Int = {
     val tiempoInicioRiego = tIR(f, pi) // Calcula el tiempo de inicio de riego para cada tablón según la programación pi
     val tiempoRiego = treg(f, i) // Tiempo que lleva regar el tablón i
     val prioridad = prio(f, i) // Prioridad del tablón i
+    val tiempoSupervivencia = tsup(f, i) // Tiempo de supervivencia del tablón i
 
     // Calcula el costo de regar el tablón i
-    val costo = tiempoInicioRiego(i) + tiempoRiego * prioridad
+    val costo = tiempoInicioRiego(i) + tiempoRiego * prioridad + tiempoSupervivencia
     costo
   }
 
@@ -115,4 +116,33 @@ package object finca
     f.indices.foldLeft(0) { (acc, i) =>
       acc + costoRiegoTablon(i, f, pi) // Acumula el costo total sumando el costo de riego de cada tablón
     }
+  }
+
+  def generarProgramacionesRiego(f: Finca): Vector[ProgRiego] = {
+    val n = f.length // Tamaño de la finca
+
+    // Función auxiliar recursiva para generar todas las permutaciones
+    def generarPermutaciones(acc: Vector[ProgRiego], disponibles: Vector[Int], parcial: ProgRiego): Vector[ProgRiego] = {
+      if (disponibles.isEmpty) {
+        acc :+ parcial // Agregar la permutación parcial al resultado
+      } else {
+        disponibles.flatMap { i =>
+          val nuevaPermutacion = parcial :+ i // Agregar el siguiente número a la permutación parcial
+          val nuevosDisponibles = disponibles.filter(_ != i) // Eliminar el número usado de los disponibles
+          generarPermutaciones(acc, nuevosDisponibles, nuevaPermutacion) // Llamada recursiva con la permutación parcial actualizada
+        }
+      }
+    }
+
+    val disponibles = Vector.tabulate(n)(identity) // Vector de números del 0 al (n-1)
+    generarPermutaciones(Vector.empty, disponibles, Vector.empty) // Llamada inicial a la función auxiliar
+  }
+
+  def ProgramacionRiegoOptimo(f: Finca, d: Distancia): (ProgRiego, Int) = {
+    val programaciones = generarProgramacionesRiego(f) // Generar todas las programaciones posibles
+    val resultados = programaciones.map { pi =>
+      val costoMov = costoMovilidad(f, pi, d) // Calcular el costo de movilidad para la programación pi
+      (pi, costoMov) // Retornar la programación pi junto con su costo de movilidad
+    }
+    resultados.minBy(_._2) // Retornar la programación con el menor costo de movilidad
   }
