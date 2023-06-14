@@ -97,4 +97,51 @@ package object finca
       val parejaOrden = pi.zip(0 until pi.length).sortBy(_._1)
       Vector.tabulate(pi.length)(i => calcularTR(parejaOrden(i)._2))
     }
+
+  def costoRiegoTablon(i:Int, f:Finca, pi: ProgRiego): Int =
+    {
+      val tiemposRiego = tIR(f, pi)
+      val sup = tsup(f,i)
+      val reg = treg(f,i)
+      val tRiego = tiemposRiego(i)
+      if((sup - reg) >= tRiego)
+        {
+          sup-(tRiego + reg)
+        }
+      else
+        {
+          prio(f,i) * ((tRiego + reg) - sup)
+        }
+    }
+
+  def costoRiegoFinca(f:Finca, pi: ProgRiego): Int =
+  {
+    val riegos = (for(x <- 0 until   pi.length) yield costoRiegoTablon(x,f, pi))
+    riegos.foldLeft(0)((x,y) => x+y)
+  }
+
+  def costoMovilidad(f: Finca, pi: ProgRiego, d: Distancia): Int = {
+      val costos = for(x <- 0 until pi.length-1) yield d(pi(x))((pi(x+1)))
+      costos.foldLeft(0)((x,y) => x+y)
+  }
+/*
+  def generarProgramacionesRiego(f:Finca): Vector[ProgRiego] ={
+    val n = f.length
+    val primeraLista = for(x <- 0 until n) yield x
+
+    def generarCombinaciones(vectorI: Vector[ProgRiego], n:Int): Vector[ProgRiego] ={
+      if(n == 1)
+        {
+          vectorI
+        }
+        else {
+        val lista = Vector.tabulate(n)(i => n)
+        val nuevaLista = vectorI :+ lista
+        generarCombinaciones(nuevaLista, n - 1)
+      }
+    }
+    generarCombinaciones(Vector(primeraLista.toVector),n)
+  }
+
+ */
 }
