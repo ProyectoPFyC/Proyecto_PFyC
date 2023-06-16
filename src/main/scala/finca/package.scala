@@ -5,6 +5,10 @@
  *
  *
  */
+
+//import common._
+
+import scala.collection.parallel.CollectionConverters.ImmutableIterableIsParallelizable
 import scala.util.Random
 package object finca
 {
@@ -97,6 +101,19 @@ package object finca
       val parejaOrden = pi.zip(0 until pi.length).sortBy(_._1)
       Vector.tabulate(pi.length)(i => calcularTR(parejaOrden(i)._2))
     }
+  def tIR2(f: Finca, pi: ProgRiego): TiempolnicioRiego = {
+    def calcularTR(par: Int): Int = {
+      if (par == 0) {
+        0
+      }
+      else {
+        treg(f, pi(par - 1)) + calcularTR(par - 1)
+      }
+    }
+
+    val parejaOrden = pi.zip(0 until pi.length)
+    Vector.tabulate(pi.length)(i => calcularTR(parejaOrden(i)._2))
+  }
 
   def costoRiegoTablon(i:Int, f:Finca, pi: ProgRiego): Int =
     {
@@ -104,6 +121,7 @@ package object finca
       val sup = tsup(f,i)
       val reg = treg(f,i)
       val tRiego = tiemposRiego(i)
+
       if((sup - reg) >= tRiego)
         {
           sup-(tRiego + reg)
@@ -116,32 +134,28 @@ package object finca
 
   def costoRiegoFinca(f:Finca, pi: ProgRiego): Int =
   {
-    val riegos = (for(x <- 0 until   pi.length) yield costoRiegoTablon(x,f, pi))
-    riegos.foldLeft(0)((x,y) => x+y)
+    val riegos = for (x <- 0 until pi.length) yield costoRiegoTablon(x, f, pi)
+    riegos.foldLeft(0)((x, y) => x + y)
+  }
+
+  def costoRiegoFinca2(f: Finca, pi: ProgRiego): Int = {
+    (for (x <- 0 until pi.length) yield costoRiegoTablon(x, f, pi)).foldLeft(0)((x, y) => x + y)
+  }
+
+  def costoRiegoFinca2Par(f: Finca, pi: ProgRiego): Int = {
+    (for (x <- 0 until pi.length) yield costoRiegoTablon(x, f, pi)).par.foldLeft(0)((x, y) => x + y)
   }
 
   def costoMovilidad(f: Finca, pi: ProgRiego, d: Distancia): Int = {
-      val costos = for(x <- 0 until pi.length-1) yield d(pi(x))((pi(x+1)))
+      val costos = for(x <- 0 until pi.length-1) yield d(pi(x))(pi(x+1))
       costos.foldLeft(0)((x,y) => x+y)
   }
-/*
-  def generarProgramacionesRiego(f:Finca): Vector[ProgRiego] ={
-    val n = f.length
-    val primeraLista = for(x <- 0 until n) yield x
 
-    def generarCombinaciones(vectorI: Vector[ProgRiego], n:Int): Vector[ProgRiego] ={
-      if(n == 1)
-        {
-          vectorI
-        }
-        else {
-        val lista = Vector.tabulate(n)(i => n)
-        val nuevaLista = vectorI :+ lista
-        generarCombinaciones(nuevaLista, n - 1)
-      }
-    }
-    generarCombinaciones(Vector(primeraLista.toVector),n)
+  def costoMovilidad2(f: Finca, pi: ProgRiego, d: Distancia): Int = {
+    (for (x <- 0 until pi.length - 1) yield d(pi(x))(pi(x + 1))).foldLeft(0)((x, y) => x + y)
   }
 
- */
+  def costoMovilidad2Par(f: Finca, pi: ProgRiego, d: Distancia): Int = {
+    (for (x <- 0 until pi.length - 1) yield d(pi(x))(pi(x + 1))).par.foldLeft(0)((x, y) => x + y)
+  }
 }
