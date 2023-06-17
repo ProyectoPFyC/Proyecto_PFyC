@@ -28,7 +28,25 @@ tIR(F2,prog2)
 val CostoDeRiegoFinca: Int = costoRiegoFinca(F2, prog2)
 val CostoDeMovilidad: Int = costoMovilidad(DF2, prog2)
 
-generarProgramacionesRiego(F1)
-generarProgramacionesRiego(F2)
+
+val programacionesF1 = generarProgramacionesRiego(F1)
+val programacionesF2 = generarProgramacionesRiego(F2)
+
+println("Programaciones de riego para F1:")
+val outputF1: Seq[String] = for {
+  prog <- programacionesF1
+} yield prog.mkString(", ")
+println(outputF1.mkString("\n"))
+val tamaño1 = outputF1.length
+println()
+
+println("Programaciones de riego para F2:")
+val outputF2: Seq[String] = for {
+  prog <- programacionesF2
+} yield prog.mkString(", ")
+val tamaño1 = outputF2.length
+println(outputF2.mkString("\n"))
+
 val resultado1: (ProgRiego, Int) = ProgramacionRiegoOptimo(F1, DF1)
 val resultado2: (ProgRiego, Int) = ProgramacionRiegoOptimo(F2, DF2)
+
