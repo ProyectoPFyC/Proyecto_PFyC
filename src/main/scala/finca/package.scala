@@ -1,4 +1,4 @@
-package object tablon {
+package object finca {
 
   import scala.util.Random
 
