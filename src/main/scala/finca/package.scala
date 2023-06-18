@@ -1,9 +1,9 @@
-/****************************************
- *                Integrantes
+/**
+ *            Integrantes:
  * Samuel Galindo - 2177491
  *
  *
- *
+ * Kevin Velez - 2123281
  */
 
 //import common._
@@ -152,4 +152,3 @@ package object finca
     costoProgramaciones.minBy(_._2)
   }
 }
-
