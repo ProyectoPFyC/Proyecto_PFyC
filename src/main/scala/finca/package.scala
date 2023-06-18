@@ -88,17 +88,7 @@ package object finca
   }
 
 
-  def tIR(f: Finca, pi: ProgRiego): TiempolnicioRiego =
-    {
-      def calcularTR(i:Int): Int = {
-        if (i == 0) i else treg(f,pi(i-1)) + calcularTR(i-1)
-      }
-
-      val parejaOrden = pi.zip(0 until pi.length).sortBy(_._1)
-      Vector.tabulate(pi.length)(i => calcularTR(parejaOrden(i)._2))
-    }
-
-  def tIR2(f: Finca, pi: ProgRiego): TiempolnicioRiego = {
+  def tIR(f: Finca, pi: ProgRiego): TiempolnicioRiego = {
       def acumulado(v: Vector[Int]): Vector[Int] ={
         v.scanLeft(0)(_+_).zip(pi).sortBy(_._2).map(x=> x._1)
       }
@@ -107,70 +97,59 @@ package object finca
     acumulado(tiemposRiego)
   }
 
-  def costoRiegoTablon(i:Int, f:Finca, pi: ProgRiego): Int =
-    {
-      val tiemposRiego = tIR(f, pi)
-      val sup = tsup(f,i)
-      val reg = treg(f,i)
-      val tRiego = tiemposRiego(i)
+  def costoRiegoTablon(i: Int, f: Finca, pi: ProgRiego): Int = {
+    val tiemposRiego = tIR(f, pi)
+    val sup = tsup(f, i)
+    val reg = treg(f, i)
+    val tRiego = tiemposRiego(i)
 
-      if((sup - reg) >= tRiego) sup-(tRiego + reg) else prio(f,i) * ((tRiego + reg) - sup)
+    (sup - reg) match {
+      case diff if diff >= tRiego => sup - (tRiego + reg)
+      case _ => prio(f, i) * ((tRiego + reg) - sup)
     }
-
-  def costoRiegoFinca(f:Finca, pi: ProgRiego): Int =
-  {
-    val riegos = for (x <- 0 until pi.length) yield costoRiegoTablon(x, f, pi)
-    riegos.foldLeft(0)((x, y) => x + y)
   }
-
-  def costoRiegoFinca2(f: Finca, pi: ProgRiego): Int = {
+  def costoRiegoFinca(f: Finca, pi: ProgRiego): Int = {
     (for (x <- 0 until pi.length) yield costoRiegoTablon(x, f, pi)).foldLeft(0)((x, y) => x + y)
   }
 
-  def costoRiegoFinca2Par(f: Finca, pi: ProgRiego): Int = {
+  def costoRiegoFincaPar(f: Finca, pi: ProgRiego): Int = {
     (for (x <- 0 until pi.length) yield costoRiegoTablon(x, f, pi)).par.foldLeft(0)((x, y) => x + y)
   }
 
   def costoMovilidad(f: Finca, pi: ProgRiego, d: Distancia): Int = {
-      val costos = for(x <- 0 until pi.length-1) yield d(pi(x))(pi(x+1))
-      costos.foldLeft(0)((x,y) => x+y)
-  }
-
-  def costoMovilidad2(f: Finca, pi: ProgRiego, d: Distancia): Int = {
     (for (x <- 0 until pi.length - 1) yield d(pi(x))(pi(x + 1))).foldLeft(0)((x, y) => x + y)
   }
 
-  def costoMovilidad2Par(f: Finca, pi: ProgRiego, d: Distancia): Int = {
+  def costoMovilidadPar(f: Finca, pi: ProgRiego, d: Distancia): Int = {
     (for (x <- 0 until pi.length - 1) yield d(pi(x))(pi(x + 1))).par.foldLeft(0)((x, y) => x + y)
   }
 
   def generarProgramacionesRiego(f: Finca): Vector[ProgRiego] = {
-    val n = f.length // Tamaño de la finca
-    // Función auxiliar recursiva para generar todas las permutaciones
-    def generarPermutaciones(acc: Vector[ProgRiego], disponibles: Vector[Int], parcial: ProgRiego): Vector[ProgRiego] = {
-      if (disponibles.isEmpty) {
-        acc :+ parcial // Agregar la permutación parcial al resultado
-      } else {
-        disponibles.flatMap { i =>
-          val nuevaPermutacion = parcial :+ i // Agregar el siguiente número a la permutación parcial
-          val nuevosDisponibles = disponibles.filter(_ != i) // Eliminar el número usado de los disponibles
-          generarPermutaciones(acc, nuevosDisponibles, nuevaPermutacion) // Llamada recursiva con la permutación parcial actualizada
-        }
-      }
+    def esProgramacionValida(programacion: ProgRiego, f: Finca): Boolean = {
+      val tiemposRiego = tIR(f, programacion)
+
+      val condicion1 = tiemposRiego.distinct.length == tiemposRiego.length
+      val condicion2 = tiemposRiego.zip(programacion).foldLeft(0)((acc, pair) => acc + treg(f, pair._2)) >= tiemposRiego.max
+
+      condicion1 && condicion2
     }
 
-    val disponibles = Vector.tabulate(n)(identity) // Vector de números del 0 al (n-1)
-    generarPermutaciones(Vector.empty, disponibles, Vector.empty) // Llamada inicial a la función auxiliar
+    val indicesTablones = f.indices.toVector
+
+    def generarProgramacionesRiegoRecursivo(f: Finca, indicesDisponibles: Vector[Int]): Vector[ProgRiego] = {
+      indicesDisponibles.permutations.toVector.filter(esProgramacionValida(_, f))
+    }
+    generarProgramacionesRiegoRecursivo(f, indicesTablones)
   }
 
   def ProgramacionRiegoOptimo(f: Finca, d: Distancia): (ProgRiego, Int) = {
-    val programaciones = generarProgramacionesRiego(f) // Generar todas las programaciones posibles para la finca aleatoria
-    val resultados = programaciones.map { pi =>
-      val costoRiego = costoRiegoFinca(f, pi) // Calcular el costo de riego para la programación pi en la finca aleatoria
-      val costoMov = costoMovilidad(f, pi, d) // Calcular el costo de movilidad para la programación pi en la finca aleatoria
-      (pi, costoRiego + costoMov) // Retornar la programación pi junto con su costo total en la finca aleatoria
+    val programaciones = generarProgramacionesRiego(f)
+    val costoProgramaciones = programaciones.map { pi =>
+      val costoRiego = costoRiegoFinca(f, pi)
+      val costoMov = costoMovilidad(f, pi, d)
+      (pi, costoRiego + costoMov)
     }
-    resultados.minBy(_._2) // Retornar la programación con el menor costo total (costo de riego + costo de movilidad) en la finca aleatoria
+    costoProgramaciones.minBy(_._2)
   }
 }
 
