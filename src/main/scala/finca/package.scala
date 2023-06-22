@@ -108,21 +108,23 @@ package object finca
       case _ => prio(f, i) * ((tRiego + reg) - sup)
     }
   }
+
   def costoRiegoFinca(f: Finca, pi: ProgRiego): Int = {
-    (for (x <- 0 until pi.length) yield costoRiegoTablon(x, f, pi)).foldLeft(0)((x, y) => x + y)
+    Vector.tabulate(f.length)(i => costoRiegoTablon(i,f,pi)).foldLeft(0)((x, y) => x + y)
   }
 
   def costoRiegoFincaPar(f: Finca, pi: ProgRiego): Int = {
-    (for (x <- 0 until pi.length) yield costoRiegoTablon(x, f, pi)).par.foldLeft(0)((x, y) => x + y)
+    Vector.tabulate(f.length)(i => costoRiegoTablon(i, f, pi)).par.foldLeft(0)((x, y) => x + y)
   }
 
   def costoMovilidad(f: Finca, pi: ProgRiego, d: Distancia): Int = {
-    (for (x <- 0 until pi.length - 1) yield d(pi(x))(pi(x + 1))).foldLeft(0)((x, y) => x + y)
+    Vector.tabulate(f.length-1)(i=> d(pi(i))(pi(i + 1))).foldLeft(0)((x, y) => x + y)
   }
 
   def costoMovilidadPar(f: Finca, pi: ProgRiego, d: Distancia): Int = {
-    (for (x <- 0 until pi.length - 1) yield d(pi(x))(pi(x + 1))).par.foldLeft(0)((x, y) => x + y)
+    Vector.tabulate(f.length-1)(i=> d(pi(i))(pi(i + 1))).par.foldLeft(0)((x, y) => x + y)
   }
+
 
   def generarProgramacionesRiego(f: Finca): Vector[ProgRiego] = {
     def esProgramacionValida(programacion: ProgRiego, f: Finca): Boolean = {
