@@ -126,7 +126,7 @@ package object finca
   }
 
 
-  def generarProgramacionesRiego(f: Finca): Vector[ProgRiego] = {
+   def generarProgramacionesRiego(f: Finca): Vector[ProgRiego] = {
     def esProgramacionValida(programacion: ProgRiego, f: Finca): Boolean = {
       val tiemposRiego = tIR(f, programacion)
 
@@ -139,9 +139,52 @@ package object finca
     val indicesTablones = f.indices.toVector
 
     def generarProgramacionesRiegoRecursivo(f: Finca, indicesDisponibles: Vector[Int]): Vector[ProgRiego] = {
-      indicesDisponibles.permutations.toVector.filter(esProgramacionValida(_, f))
+      if (indicesDisponibles.isEmpty) {
+        Vector.empty
+      } else if (indicesDisponibles.length == 1) {
+        val programacion = Vector(indicesDisponibles.head)
+        if (esProgramacionValida(programacion, f)) Vector(programacion) else Vector.empty
+      } else {
+        indicesDisponibles.flatMap { indice =>
+          val restoIndices = indicesDisponibles.filter(_ != indice)
+          generarProgramacionesRiegoRecursivo(f, restoIndices).map(indice +: _)
+        }.filter(esProgramacionValida(_, f))
+      }
     }
+
     generarProgramacionesRiegoRecursivo(f, indicesTablones)
+  }
+
+  import scala.collection.parallel.CollectionConverters._
+
+  def generarProgramacionesRiegoPar(f: Finca): Vector[ProgRiego] = {
+    def esProgramacionValida(programacion: ProgRiego, f: Finca): Boolean = {
+      val tiemposRiego = tIR(f, programacion)
+
+      val condicion1 = tiemposRiego.distinct.length == tiemposRiego.length
+      val condicion2 = tiemposRiego.zip(programacion).foldLeft(0)((acc, pair) => acc + treg(f, pair._2)) >= tiemposRiego.max
+
+      condicion1 && condicion2
+    }
+
+    val indicesTablones = f.indices.toList
+
+    def generarProgramacionesRiegoRecursivos(indicesDisponibles: List[Int]): Vector[ProgRiego] = {
+      indicesDisponibles match {
+        case Nil => Vector.empty
+        case indice :: Nil =>
+          val programacion = Vector(indice)
+          if (esProgramacionValida(programacion, f)) Vector(programacion) else Vector.empty
+        case _ =>
+          indicesDisponibles.toVector.par.flatMap { indice =>
+            val restoIndices = indicesDisponibles.filterNot(_ == indice)
+            val subprogramaciones = generarProgramacionesRiegoRecursivos(restoIndices)
+            subprogramaciones.map(indice +: _)
+          }.filter(esProgramacionValida(_, f)).toVector
+      }
+    }
+
+    generarProgramacionesRiegoRecursivos(indicesTablones)
   }
 
   def ProgramacionRiegoOptimo(f: Finca, d: Distancia): (ProgRiego, Int) = {
