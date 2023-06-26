@@ -8,7 +8,8 @@
 
 //import common._
 
-import scala.collection.parallel.CollectionConverters.ImmutableIterableIsParallelizable
+import common.parallel
+
 import scala.util.Random
 package object finca
 {
@@ -110,21 +111,54 @@ package object finca
   }
 
   def costoRiegoFinca(f: Finca, pi: ProgRiego): Int = {
-    Vector.tabulate(f.length)(i => costoRiegoTablon(i,f,pi)).foldLeft(0)((x, y) => x + y)
+    (for (x <- 0 until pi.length) yield costoRiegoTablon(x, f, pi)).foldLeft(0)((x, y) => x + y)
   }
 
   def costoRiegoFincaPar(f: Finca, pi: ProgRiego): Int = {
-    Vector.tabulate(f.length)(i => costoRiegoTablon(i, f, pi)).par.foldLeft(0)((x, y) => x + y)
+    def calcularRiegoAux(ini: Int, fin: Int): Int =
+    {
+      (for (x <- ini until fin) yield costoRiegoTablon(x, f, pi)).foldLeft(0)((x, y) => x + y)
+    }
+
+    val n = f.length
+    if(n <= 32)
+    {
+      val mitad = n / 2
+      val unCuarto = n / 2
+      val tresCuartos = mitad + unCuarto
+
+      val valores = parallel(calcularRiegoAux(0, unCuarto), calcularRiegoAux(unCuarto, mitad), calcularRiegoAux(mitad, tresCuartos), calcularRiegoAux(tresCuartos, n))
+      valores._1 + valores._2 + valores._3 + valores._4
+    }
+    else
+    {
+      costoRiegoFinca(f,pi)
+    }
   }
 
   def costoMovilidad(f: Finca, pi: ProgRiego, d: Distancia): Int = {
-    Vector.tabulate(f.length-1)(i=> d(pi(i))(pi(i + 1))).foldLeft(0)((x, y) => x + y)
+    (for (x <- 0 until pi.length - 1) yield d(pi(x))(pi(x + 1))).foldLeft(0)((x, y) => x + y)
   }
 
   def costoMovilidadPar(f: Finca, pi: ProgRiego, d: Distancia): Int = {
-    Vector.tabulate(f.length-1)(i=> d(pi(i))(pi(i + 1))).par.foldLeft(0)((x, y) => x + y)
-  }
+    def calcularMovilidadAux(ini: Int, fin: Int): Int = {
+      (for (x <- ini until fin) yield d(pi(x))(pi(x + 1))).foldLeft(0)((x, y) => x + y)
+    }
 
+    val n = f.length
+    if (n <= 8) {
+      val mitad = n / 2
+      val unCuarto = n / 2
+      val tresCuartos = mitad + unCuarto
+
+      val valores = parallel(calcularMovilidadAux(0, unCuarto), calcularMovilidadAux(unCuarto, mitad), calcularMovilidadAux(mitad, tresCuartos), calcularMovilidadAux(tresCuartos, n))
+      valores._1 + valores._2 + valores._3 + valores._4
+    }
+    else
+    {
+      costoMovilidad(f, pi, d)
+    }
+  }
 
    def generarProgramacionesRiego(f: Finca): Vector[ProgRiego] = {
     def esProgramacionValida(programacion: ProgRiego, f: Finca): Boolean = {
