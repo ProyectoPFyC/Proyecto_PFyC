@@ -10,6 +10,7 @@
 
 import common.parallel
 
+import scala.collection.parallel.CollectionConverters._
 import scala.util.Random
 package object finca
 {
@@ -121,10 +122,10 @@ package object finca
     }
 
     val n = f.length
-    if(n <= 32)
+    if(n >= 40)
     {
       val mitad = n / 2
-      val unCuarto = n / 2
+      val unCuarto = mitad/ 2
       val tresCuartos = mitad + unCuarto
 
       val valores = parallel(calcularRiegoAux(0, unCuarto), calcularRiegoAux(unCuarto, mitad), calcularRiegoAux(mitad, tresCuartos), calcularRiegoAux(tresCuartos, n))
@@ -146,12 +147,12 @@ package object finca
     }
 
     val n = f.length
-    if (n <= 8) {
+    if (n >= 840) {
       val mitad = n / 2
-      val unCuarto = n / 2
+      val unCuarto = mitad/ 2
       val tresCuartos = mitad + unCuarto
 
-      val valores = parallel(calcularMovilidadAux(0, unCuarto), calcularMovilidadAux(unCuarto, mitad), calcularMovilidadAux(mitad, tresCuartos), calcularMovilidadAux(tresCuartos, n))
+      val valores = parallel(calcularMovilidadAux(0, unCuarto), calcularMovilidadAux(unCuarto, mitad), calcularMovilidadAux(mitad, tresCuartos), calcularMovilidadAux(tresCuartos, n-1))
       valores._1 + valores._2 + valores._3 + valores._4
     }
     else
@@ -189,7 +190,6 @@ package object finca
     generarProgramacionesRiegoRecursivo(f, indicesTablones)
   }
 
-  import scala.collection.parallel.CollectionConverters._
 
   def generarProgramacionesRiegoPar(f: Finca): Vector[ProgRiego] = {
     def esProgramacionValida(programacion: ProgRiego, f: Finca): Boolean = {
