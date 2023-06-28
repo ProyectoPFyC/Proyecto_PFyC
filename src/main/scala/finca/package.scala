@@ -230,4 +230,22 @@ package object finca
     }
     costoProgramaciones.minBy(_._2)
   }
+
+  def ProgramacionRiegoOptimoPar(f: Finca, d: Distancia): (ProgRiego, Int) =
+  {
+    if (f.length > 4)
+    {
+      val programaciones = generarProgramacionesRiegoPar(f)
+      val costoProgramaciones = programaciones.par.map { pi =>
+        val costoRiego = costoRiegoFinca(f, pi)
+        val costoMov = costoMovilidad(f, pi, d)
+        (pi, costoRiego + costoMov)
+      }
+      costoProgramaciones.minBy(_._2)
+    }
+    else
+    {
+      ProgramacionRiegoOptimo(f, d)
+    }
+  }
 }
