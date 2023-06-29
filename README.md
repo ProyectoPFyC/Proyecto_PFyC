@@ -8,7 +8,6 @@ El paquete `finca` proporciona funciones para gestionar una finca, programar el 
 1. [Integrantes del equipo](#integrantes)
 2. [Funciones disponibles](#funciones-disponibles)
 3. [Uso de las funciones](#uso-de-las-funciones)
-4. [Ejemplos de uso](#ejemplos-de-uso)
 
 ## Integrantes del equipo<a name="integrantes"></a>
 
