@@ -46,9 +46,7 @@ import finca.common.parallel
 import scala.collection.parallel.CollectionConverters._
 import scala.util.Random
 
-A continuación, se pueden utilizar las funciones proporcionadas se
-
-## Ejemplos de uso<a name="ejemplos-de-uso"></a>
+A continuación, se pueden utilizar las funciones proporcionadas 
 
 
 1. Crear una finca al azar:
