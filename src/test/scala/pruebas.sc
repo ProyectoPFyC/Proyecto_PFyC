@@ -31,6 +31,196 @@ val distancia7 = Vector(Vector(0, 30, 22, 5, 23, 29, 1, 25, 31, 16, 2, 11), Vect
 val distancia8 = Vector(Vector(0, 16, 26, 23, 8, 32, 4, 36, 27, 36, 13, 7, 16), Vector(9, 0, 16, 24, 29, 25, 36, 39, 22, 18, 36, 25, 31), Vector(32, 26, 0, 37, 31, 26, 18, 30, 20, 10, 13, 27, 36), Vector(21, 5, 35, 0, 13, 37, 2, 36, 8, 5, 13, 21, 22), Vector(28, 3, 25, 25, 0, 2, 17, 12, 14, 19, 8, 33, 1), Vector(36, 20, 15, 17, 9, 0, 21, 36, 18, 9, 3, 38, 34), Vector(39, 26, 33, 2, 16, 34, 0, 28, 16, 10, 37, 4, 13), Vector(21, 15, 26, 6, 9, 16, 4, 0, 33, 25, 1, 17, 38), Vector(19, 2, 24, 18, 25, 14, 4, 21, 0, 4, 14, 33, 4), Vector(14, 9, 22, 31, 38, 12, 20, 29, 17, 0, 27, 19, 8), Vector(7, 24, 10, 22, 5, 29, 27, 25, 38, 15, 0, 10, 10), Vector(23, 28, 12, 21, 12, 24, 27, 20, 23, 9, 36, 0, 22), Vector(23, 21, 23, 2, 25, 1, 17, 3, 36, 20, 35, 3, 0))
 
 
+//generarProgramacionesRiegoPar
+// Finca 0
+generarProgramacionesRiegoPar(finca0)
+//val res0: Vector[finca.ProgRiego] = Vector(Vector(0, 1, 2), Vector(0, 2, 1), Vector(1, 0, 2), Vector(1, 2, 0), Vector(2, 0, 1), Vector(2, 1, 0))
+// Finca 1
+generarProgramacionesRiegoPar(finca1)
+//val res1: Vector[finca.ProgRiego] = Vector(Vector(0, 1, 2, 3), Vector(0, 1, 3, 2), Vector(0, 2, 1, 3), Vector(0, 2, 3, 1), Vector(0, 3, 1, 2), Vector(0, 3, 2, 1), Vector(1, 0, 2, 3), Vector(1, 0, 3, 2), Vector(1, 2, 0, 3), Vector(1, 2, 3, 0), Vector(1, 3, 0, 2), Vector(1, 3, 2, 0), Vector(2, 0, 1, 3), Vector(2, 0, 3, 1), Vector(2, 1, 0, 3), Vector(2, 1, 3, 0), Vector(2, 3, 0, 1), Vector(2, 3, 1, 0), Vector(3, 0, 1, 2), Vector(3, 0, 2, 1), Vector(3, 1, 0, 2), Vector(3, 1, 2, 0), Vector(3, 2, 0, 1), Vector(3, 2, 1, 0))
+// Finca 2
+generarProgramacionesRiegoPar(finca2)
+//val res2: Vector[finca.ProgRiego] = Vector(Vector(0, 1, 2, 3, 4), Vector(0, 1, 2, 4, 3), Vector(0, 1, 3, 2, 4), Vector(0, 1, 3, 4, 2), Vector(0, 1, 4, 2, 3), Vector(0, 1, 4, 3, 2), Vector(0, 2, 1, 3, 4), Vector(0, 2, 1, 4, 3), Vector(0, 2, 3, 1, 4), Vector(0, 2, 3, 4, 1), Vector(0, 2, 4, 1, 3), Vector(0, 2, 4, 3, 1), Vector(0, 3, 1, 2, 4), Vector(0, 3, 1, 4, 2), Vector(0, 3, 2, 1, 4), Vector(0, 3, 2, 4, 1), Vector(0, 3, 4, 1, 2), Vector(0, 3, 4, 2, 1), Vector(0, 4, 1, 2, 3), Vector(0, 4, 1, 3, 2), Vector(0, 4, 2, 1, 3), Vector(0, 4, 2, 3, 1), Vector(0, 4, 3, 1, 2), Vector(0, 4, 3, 2, 1), Vector(1, 0, 2, 3, 4), Vector(1, 0, 2, 4, 3), Vector(1, 0, 3, 2, 4), Vector(1, 0, 3, 4, 2), Vector(1, 0, 4, 2, 3), Vector(1, 0, 4, 3, 2), Vector(1, 2, 0, 3, 4), Vector(1, 2, 0, 4, 3), Vector(1, 2, 3, 0,...
+// Finca 3
+generarProgramacionesRiegoPar(finca3)
+//val res3: Vector[finca.ProgRiego] = Vector(Vector(0, 1, 2, 3, 4, 5), Vector(0, 1, 2, 3, 5, 4), Vector(0, 1, 2, 4, 3, 5), Vector(0, 1, 2, 4, 5, 3), Vector(0, 1, 2, 5, 3, 4), Vector(0, 1, 2, 5, 4, 3), Vector(0, 1, 3, 2, 4, 5), Vector(0, 1, 3, 2, 5, 4), Vector(0, 1, 3, 4, 2, 5), Vector(0, 1, 3, 4, 5, 2), Vector(0, 1, 3, 5, 2, 4), Vector(0, 1, 3, 5, 4, 2), Vector(0, 1, 4, 2, 3, 5), Vector(0, 1, 4, 2, 5, 3), Vector(0, 1, 4, 3, 2, 5), Vector(0, 1, 4, 3, 5, 2), Vector(0, 1, 4, 5, 2, 3), Vector(0, 1, 4, 5, 3, 2), Vector(0, 1, 5, 2, 3, 4), Vector(0, 1, 5, 2, 4, 3), Vector(0, 1, 5, 3, 2, 4), Vector(0, 1, 5, 3, 4, 2), Vector(0, 1, 5, 4, 2, 3), Vector(0, 1, 5, 4, 3, 2), Vector(0, 2, 1, 3, 4, 5), Vector(0, 2, 1, 3, 5, 4), Vector(0, 2, 1, 4, 3, 5), Vector(0, 2, 1, 4, 5, 3), Vector(0, 2, 1, 5, 3, 4), ...
+// Finca 4
+generarProgramacionesRiegoPar(finca4)
+//val res4: Vector[finca.ProgRiego] = Vector(Vector(0, 1, 2, 3, 4, 5, 6), Vector(0, 1, 2, 3, 4, 6, 5), Vector(0, 1, 2, 3, 5, 4, 6), Vector(0, 1, 2, 3, 5, 6, 4), Vector(0, 1, 2, 3, 6, 4, 5), Vector(0, 1, 2, 3, 6, 5, 4), Vector(0, 1, 2, 4, 3, 5, 6), Vector(0, 1, 2, 4, 3, 6, 5), Vector(0, 1, 2, 4, 5, 3, 6), Vector(0, 1, 2, 4, 5, 6, 3), Vector(0, 1, 2, 4, 6, 3, 5), Vector(0, 1, 2, 4, 6, 5, 3), Vector(0, 1, 2, 5, 3, 4, 6), Vector(0, 1, 2, 5, 3, 6, 4), Vector(0, 1, 2, 5, 4, 3, 6), Vector(0, 1, 2, 5, 4, 6, 3), Vector(0, 1, 2, 5, 6, 3, 4), Vector(0, 1, 2, 5, 6, 4, 3), Vector(0, 1, 2, 6, 3, 4, 5), Vector(0, 1, 2, 6, 3, 5, 4), Vector(0, 1, 2, 6, 4, 3, 5), Vector(0, 1, 2, 6, 4, 5, 3), Vector(0, 1, 2, 6, 5, 3, 4), Vector(0, 1, 2, 6, 5, 4, 3), Vector(0, 1, 3, 2, 4, 5, 6), Vector(0, 1, 3, 2, 4, 6, 5), ...
+
+// Finca 5
+generarProgramacionesRiegoPar(finca5)
+//val res5: Vector[finca.ProgRiego] = Vector(Vector(0, 1, 2, 3, 4, 5, 6, 7), Vector(0, 1, 2, 3, 4, 5, 7, 6), Vector(0, 1, 2, 3, 4, 6, 5, 7), Vector(0, 1, 2, 3, 4, 6, 7, 5), Vector(0, 1, 2, 3, 4, 7, 5, 6), Vector(0, 1, 2, 3, 4, 7, 6, 5), Vector(0, 1, 2, 3, 5, 4, 6, 7), Vector(0, 1, 2, 3, 5, 4, 7, 6), Vector(0, 1, 2, 3, 5, 6, 4, 7), Vector(0, 1, 2, 3, 5, 6, 7, 4), Vector(0, 1, 2, 3, 5, 7, 4, 6), Vector(0, 1, 2, 3, 5, 7, 6, 4), Vector(0, 1, 2, 3, 6, 4, 5, 7), Vector(0, 1, 2, 3, 6, 4, 7, 5), Vector(0, 1, 2, 3, 6, 5, 4, 7), Vector(0, 1, 2, 3, 6, 5, 7, 4), Vector(0, 1, 2, 3, 6, 7, 4, 5), Vector(0, 1, 2, 3, 6, 7, 5, 4), Vector(0, 1, 2, 3, 7, 4, 5, 6), Vector(0, 1, 2, 3, 7, 4, 6, 5), Vector(0, 1, 2, 3, 7, 5, 4, 6), Vector(0, 1, 2, 3, 7, 5, 6, 4), Vector(0, 1, 2, 3, 7, 6, 4, 5), Vector(0, 1, 2, 3,...
+
+//generarProgramacionesRiego
+// Finca 0
+generarProgramacionesRiego(finca0)
+//val res0: Vector[finca.ProgRiego] = Vector(Vector(0, 1, 2), Vector(0, 2, 1), Vector(1, 0, 2), Vector(1, 2, 0), Vector(2, 0, 1), Vector(2, 1, 0))
+
+// Finca 1
+generarProgramacionesRiego(finca1)
+//val res1: Vector[finca.ProgRiego] = Vector(Vector(0, 1, 2, 3), Vector(0, 1, 3, 2), Vector(0, 2, 1, 3), Vector(0, 2, 3, 1), Vector(0, 3, 1, 2), Vector(0, 3, 2, 1), Vector(1, 0, 2, 3), Vector(1, 0, 3, 2), Vector(1, 2, 0, 3), Vector(1, 2, 3, 0), Vector(1, 3, 0, 2), Vector(1, 3, 2, 0), Vector(2, 0, 1, 3), Vector(2, 0, 3, 1), Vector(2, 1, 0, 3), Vector(2, 1, 3, 0), Vector(2, 3, 0, 1), Vector(2, 3, 1, 0), Vector(3, 0, 1, 2), Vector(3, 0, 2, 1), Vector(3, 1, 0, 2), Vector(3, 1, 2, 0), Vector(3, 2, 0, 1), Vector(3, 2, 1, 0))
+
+// Finca 2
+generarProgramacionesRiego(finca2)
+//val res2: Vector[finca.ProgRiego] = Vector(Vector(0, 1, 2, 3, 4), Vector(0, 1, 2, 4, 3), Vector(0, 1, 3, 2, 4), Vector(0, 1, 3, 4, 2), Vector(0, 1, 4, 2, 3), Vector(0, 1, 4, 3, 2), Vector(0, 2, 1, 3, 4), Vector(0, 2, 1, 4, 3), Vector(0, 2, 3, 1, 4), Vector(0, 2, 3, 4, 1), Vector(0, 2, 4, 1, 3), Vector(0, 2, 4, 3, 1), Vector(0, 3, 1, 2, 4), Vector(0, 3, 1, 4, 2), Vector(0, 3, 2, 1, 4), Vector(0, 3, 2, 4, 1), Vector(0, 3, 4, 1, 2), Vector(0, 3, 4, 2, 1), Vector(0, 4, 1, 2, 3), Vector(0, 4, 1, 3, 2), Vector(0, 4, 2, 1, 3), Vector(0, 4, 2, 3, 1), Vector(0, 4, 3, 1, 2), Vector(0, 4, 3, 2, 1), Vector(1, 0, 2, 3, 4), Vector(1, 0, 2, 4, 3), Vector(1, 0, 3, 2, 4), Vector(1, 0, 3, 4, 2), Vector(1, 0, 4, 2, 3), Vector(1, 0, 4, 3, 2), Vector(1, 2, 0, 3, 4), Vector(1, 2, 0, 4, 3), Vector(1, 2, 3, 0,...
+
+// Finca 3
+generarProgramacionesRiego(finca3)
+//val res3: Vector[finca.ProgRiego] = Vector(Vector(0, 1, 2, 3, 4, 5), Vector(0, 1, 2, 3, 5, 4), Vector(0, 1, 2, 4, 3, 5), Vector(0, 1, 2, 4, 5, 3), Vector(0, 1, 2, 5, 3, 4), Vector(0, 1, 2, 5, 4, 3), Vector(0, 1, 3, 2, 4, 5), Vector(0, 1, 3, 2, 5, 4), Vector(0, 1, 3, 4, 2, 5), Vector(0, 1, 3, 4, 5, 2), Vector(0, 1, 3, 5, 2, 4), Vector(0, 1, 3, 5, 4, 2), Vector(0, 1, 4, 2, 3, 5), Vector(0, 1, 4, 2, 5, 3), Vector(0, 1, 4, 3, 2, 5), Vector(0, 1, 4, 3, 5, 2), Vector(0, 1, 4, 5, 2, 3), Vector(0, 1, 4, 5, 3, 2), Vector(0, 1, 5, 2, 3, 4), Vector(0, 1, 5, 2, 4, 3), Vector(0, 1, 5, 3, 2, 4), Vector(0, 1, 5, 3, 4, 2), Vector(0, 1, 5, 4, 2, 3), Vector(0, 1, 5, 4, 3, 2), Vector(0, 2, 1, 3, 4, 5), Vector(0, 2, 1, 3, 5, 4), Vector(0, 2, 1, 4, 3, 5), Vector(0, 2, 1, 4, 5, 3), Vector(0, 2, 1, 5, 3, 4), ...
+
+// Finca 4
+generarProgramacionesRiego(finca4)
+//val res4: Vector[finca.ProgRiego] = Vector(Vector(0, 1, 2, 3, 4, 5, 6), Vector(0, 1, 2, 3, 4, 6, 5), Vector(0, 1, 2, 3, 5, 4, 6), Vector(0, 1, 2, 3, 5, 6, 4), Vector(0, 1, 2, 3, 6, 4, 5), Vector(0, 1, 2, 3, 6, 5, 4), Vector(0, 1, 2, 4, 3, 5, 6), Vector(0, 1, 2, 4, 3, 6, 5), Vector(0, 1, 2, 4, 5, 3, 6), Vector(0, 1, 2, 4, 5, 6, 3), Vector(0, 1, 2, 4, 6, 3, 5), Vector(0, 1, 2, 4, 6, 5, 3), Vector(0, 1, 2, 5, 3, 4, 6), Vector(0, 1, 2, 5, 3, 6, 4), Vector(0, 1, 2, 5, 4, 3, 6), Vector(0, 1, 2, 5, 4, 6, 3), Vector(0, 1, 2, 5, 6, 3, 4), Vector(0, 1, 2, 5, 6, 4, 3), Vector(0, 1, 2, 6, 3, 4, 5), Vector(0, 1, 2, 6, 3, 5, 4), Vector(0, 1, 2, 6, 4, 3, 5), Vector(0, 1, 2, 6, 4, 5, 3), Vector(0, 1, 2, 6, 5, 3, 4), Vector(0, 1, 2, 6, 5, 4, 3), Vector(0, 1, 3, 2, 4, 5, 6), Vector(0, 1, 3, 2, 4, 6, 5), ...
+
+// Finca 5
+generarProgramacionesRiego(finca5)
+//val res5: Vector[finca.ProgRiego] = Vector(Vector(0, 1, 2, 3, 4, 5, 6, 7), Vector(0, 1, 2, 3, 4, 5, 7, 6), Vector(0, 1, 2, 3, 4, 6, 5, 7), Vector(0, 1, 2, 3, 4, 6, 7, 5), Vector(0, 1, 2, 3, 4, 7, 5, 6), Vector(0, 1, 2, 3, 4, 7, 6, 5), Vector(0, 1, 2, 3, 5, 4, 6, 7), Vector(0, 1, 2, 3, 5, 4, 7, 6), Vector(0, 1, 2, 3, 5, 6, 4, 7), Vector(0, 1, 2, 3, 5, 6, 7, 4), Vector(0, 1, 2, 3, 5, 7, 4, 6), Vector(0, 1, 2, 3, 5, 7, 6, 4), Vector(0, 1, 2, 3, 6, 4, 5, 7), Vector(0, 1, 2, 3, 6, 4, 7, 5), Vector(0, 1, 2, 3, 6, 5, 4, 7), Vector(0, 1, 2, 3, 6, 5, 7, 4), Vector(0, 1, 2, 3, 6, 7, 4, 5), Vector(0, 1, 2, 3, 6, 7, 5, 4), Vector(0, 1, 2, 3, 7, 4, 5, 6), Vector(0, 1, 2, 3, 7, 4, 6, 5), Vector(0, 1, 2, 3, 7, 5, 4, 6), Vector(0, 1, 2, 3, 7, 5, 6, 4), Vector(0, 1, 2, 3, 7, 6, 4, 5), Vector(0, 1, 2, 3,...
+
+
+import org.scalameter.{Key, Warmer, config}
+
+val standardConfig = config(
+  Key . exec .minWarmupRuns := 20 ,
+  Key . exec .maxWarmupRuns := 40 ,
+  Key . exec . benchRuns := 25 ,
+  Key . verbose :=false
+) withWarmer (Warmer.Default())
+
+// Finca 0
+val programacionesRiego0 = standardConfig measure {
+  generarProgramacionesRiego(finca0)
+}
+val programacionesRiegoPar0 = standardConfig measure {
+  generarProgramacionesRiegoPar(finca0)
+}
+val mejoraRendimiento0 = ((programacionesRiego0.value - programacionesRiegoPar0.value) / programacionesRiego0.value) * 100.0
+println(s"Mejora de rendimiento para finca 0: $mejoraRendimiento0%")
+/*
+val programacionesRiego0: org.scalameter.Quantity[Double] = 1.3625960000000004 ms
+
+val programacionesRiegoPar0: org.scalameter.Quantity[Double] = 9.542272 ms
+
+
+val mejoraRendimiento0: Double = -600.3008962304306
+Mejora de rendimiento para finca 0: -600.3008962304306%
+* */
+// Finca 1
+val programacionesRiego1 = standardConfig measure {
+  generarProgramacionesRiego(finca1)
+}
+val programacionesRiegoPar1 = standardConfig measure {
+  generarProgramacionesRiegoPar(finca1)
+}
+val mejoraRendimiento1 = ((programacionesRiego1.value - programacionesRiegoPar1.value) / programacionesRiego1.value) * 100.0
+println(s"Mejora de rendimiento para finca 1: $mejoraRendimiento1%")
+/*
+val programacionesRiego1: org.scalameter.Quantity[Double] = 1.416472 ms
+
+
+val programacionesRiegoPar1: org.scalameter.Quantity[Double] = 3.3330759999999997 ms
+
+
+val mejoraRendimiento1: Double = -135.30828706815242
+Mejora de rendimiento para finca 1: -135.30828706815242%
+
+*/
+// Finca 2
+val programacionesRiego2 = standardConfig measure {
+  generarProgramacionesRiego(finca2)
+}
+val programacionesRiegoPar2 = standardConfig measure {
+  generarProgramacionesRiegoPar(finca2)
+}
+val mejoraRendimiento2 = ((programacionesRiego2.value - programacionesRiegoPar2.value) / programacionesRiego2.value) * 100.0
+println(s"Mejora de rendimiento para finca 2: $mejoraRendimiento2%")
+/*
+val programacionesRiego2: org.scalameter.Quantity[Double] = 5.266564000000001 ms
+
+
+val programacionesRiegoPar2: org.scalameter.Quantity[Double] = 17.579331999999994 ms
+
+
+val mejoraRendimiento2: Double = -233.79129162771005
+Mejora de rendimiento para finca 2: -233.79129162771005%
+* */
+// Finca 3
+val programacionesRiego3 = standardConfig measure {
+  generarProgramacionesRiego(finca3)
+}
+val programacionesRiegoPar3 = standardConfig measure {
+  generarProgramacionesRiegoPar(finca3)
+}
+val mejoraRendimiento3 = ((programacionesRiego3.value - programacionesRiegoPar3.value) / programacionesRiego3.value) * 100.0
+println(s"Mejora de rendimiento para finca 3: $mejoraRendimiento3%")
+/*
+val programacionesRiego3: org.scalameter.Quantity[Double] = 31.011024 ms
+
+
+val programacionesRiegoPar3: org.scalameter.Quantity[Double] = 12.623839999999996 ms
+
+
+val mejoraRendimiento3: Double = 59.29241162755543
+Mejora de rendimiento para finca 3: 59.29241162755543%
+* */
+// Finca 4
+val programacionesRiego4 = standardConfig measure {
+  generarProgramacionesRiego(finca4)
+}
+val programacionesRiegoPar4 = standardConfig measure {
+  generarProgramacionesRiegoPar(finca4)
+}
+val mejoraRendimiento4 = ((programacionesRiego4.value - programacionesRiegoPar4.value) / programacionesRiego4.value) * 100.0
+println(s"Mejora de rendimiento para finca 4: $mejoraRendimiento4%")
+/*
+val programacionesRiego4: org.scalameter.Quantity[Double] = 71.16136399999999 ms
+
+
+val programacionesRiegoPar4: org.scalameter.Quantity[Double] = 67.26884 ms
+
+
+val mejoraRendimiento4: Double = 5.469996331155197
+Mejora de rendimiento para finca 4: 5.469996331155197%
+
+* */
+// Finca 5
+val programacionesRiego5 = standardConfig measure {
+  generarProgramacionesRiego(finca5)
+}
+val programacionesRiegoPar5 = standardConfig measure {
+  generarProgramacionesRiegoPar(finca5)
+}
+val mejoraRendimiento5 = ((programacionesRiego5.value - programacionesRiegoPar5.value) / programacionesRiego5.value) * 100.0
+println(s"Mejora de rendimiento para finca 5: $mejoraRendimiento5%")
+/*
+val programacionesRiego5: org.scalameter.Quantity[Double] = 764.1441960000001 ms
+
+
+val programacionesRiegoPar5: org.scalameter.Quantity[Double] = 474.4083720000001 ms
+
+
+val mejoraRendimiento5: Double = 37.91638090253844
+Mejora de rendimiento para finca 5: 37.91638090253844%
+* */
+// Finca 6
+val programacionesRiego6 = standardConfig measure {
+  generarProgramacionesRiego(finca6)
+}
+val programacionesRiegoPar6 = standardConfig measure {
+  generarProgramacionesRiegoPar(finca6)
+}
+val mejoraRendimiento6 = ((programacionesRiego6.value - programacionesRiegoPar6.value) / programacionesRiego6.value) * 100.0
+println(s"Mejora de rendimiento para finca 6: $mejoraRendimiento6%")
+/*
+val programacionesRiego6: org.scalameter.Quantity[Double] = 88814.465736 ms
+
+
+val programacionesRiegoPar6: org.scalameter.Quantity[Double] = 60824.38146799999 ms
+
+
+val mejoraRendimiento6: Double = 31.51523125883594
+Mejora de rendimiento para finca 6: 31.51523125883594%
+* */
 
 
 
