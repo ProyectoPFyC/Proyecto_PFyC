@@ -8,7 +8,7 @@ El paquete `finca` proporciona funciones para gestionar una finca, programar el 
 1. [Integrantes del equipo](#integrantes)
 2. [Funciones disponibles](#funciones-disponibles)
 3. [Uso de las funciones](#uso-de-las-funciones)
-
+4. [Habilitar opciones específicas del compilador](#habilitar-opciones-específicas-del-compilador)
 ## Integrantes del equipo<a name="integrantes"></a>
 
 - Samuel Galindo Cuevas - 2177491
@@ -175,6 +175,18 @@ val (programacionOptimaPar, costoOptimoPar) = ProgramacionRiegoOptimoPar(finca, 
 println(programacionOptimaPar)
 println(costoOptimoPar)
 ```
+
+## Habilitar opciones específicas del compilador
+Para habilitar opciones específicas del compilador y agregar dependencias de bibliotecas, asegúrate de incluir las siguientes líneas en tu configuración de compilación:
+
+```scala
+scalacOptions ++= Seq("-language:implicitConversions", "-deprecation")
+
+libraryDependencies ++= Seq(
+  ("com.storm-enroute" %% "scalameter-core" % "0.21").cross(CrossVersion.for3Use2_13),
+  "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.3",
+  "org.scalameta" %% "munit" % "0.7.26" % Test
+)
 
 
 
