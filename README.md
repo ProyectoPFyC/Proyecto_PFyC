@@ -38,6 +38,19 @@ El paquete `finca` proporciona las siguientes funciones:
 
 
 
+## Actualiza el archivo `build.sbt` <a name="build.sbt"></a>
+Agrega estas instrucciones, debajo de lo que ya está programado.
+
+```scala
+scalacOptions ++= Seq("-language:implicitConversions", "-deprecation")
+libraryDependencies ++= Seq(
+  ("com.storm-enroute" %% "scalameter-core" % "0.21").cross(CrossVersion.for3Use2_13),
+  "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.3",
+  "org.scalameta" %% "munit" % "0.7.26" % Test
+)
+```
+
+
 ## Uso de las funciones<a name="uso-de-las-funciones"></a>
 
 Para utilizar las funciones del paquete `finca`, se debe importar el paquete y las clases y tipos asociados:
