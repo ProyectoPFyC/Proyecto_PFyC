@@ -36,6 +36,8 @@ El paquete `finca` proporciona las siguientes funciones:
 - `ProgramacionRiegoOptimo(f: Finca, d: Distancia): (ProgRiego, Int)`: Encuentra la programación de riego óptima y su costo total para una finca `f` y una matriz de distancias `d`.
 - `ProgramacionRiegoOptimoPar(f: Finca, d: Distancia): (ProgRiego, Int)`: Encuentra la programación de riego óptima y su costo total de forma paralela para una finca `f` y una matriz de distancias `d`.
 
+
+
 ## Uso de las funciones<a name="uso-de-las-funciones"></a>
 
 Para utilizar las funciones del paquete `finca`, se debe importar el paquete y las clases y tipos asociados:
@@ -45,6 +47,14 @@ import finca._
 import finca.common.parallel
 import scala.collection.parallel.CollectionConverters._
 import scala.util.Random
+
+scalacOptions ++= Seq("-language:implicitConversions", "-deprecation")
+
+libraryDependencies ++= Seq(
+  ("com.storm-enroute" %% "scalameter-core" % "0.21").cross(CrossVersion.for3Use2_13),
+  "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.3",
+  "org.scalameta" %% "munit" % "0.7.26" % Test
+)
 
 A continuación, se pueden utilizar las funciones proporcionadas 
 
