@@ -1,9 +1,9 @@
 /**
  *            Integrantes:
- * Samuel Galindo - 2177491
- *
- *
- * Kevin Velez - 2123281
+Samuel Galindo Cuevas – 202177491
+Ervin Caravali Ibarra - 1925648
+Kevin Alejandro Velez Agudelo – 202123281
+Jhoimar Enrique Silva Torres - 202177167
  */
 
 //import common._
@@ -65,17 +65,17 @@ package object finca
   }
 
   def distanciaAlAzar(long: Int): Distancia = {
-  //Crea una matriz de distancias para una finca
-  // de long tablones, con valores aleatorios entre
-  // 1 y long+3
-  val v = Vector.fill(long, long) {
+    //Crea una matriz de distancias para una finca
+    // de long tablones, con valores aleatorios entre
+    // 1 y long+3
+    val v = Vector.fill(long, long) {
 
-    random.nextInt(long * 3) + 1
-  }
+      random.nextInt(long * 3) + 1
+    }
     Vector.tabulate(long, long)(
-    (i, j) => if (i < i) v(i)(j)
-              else if (i == j) 0
-              else v(j)(i))
+      (i, j) => if (i < i) v(i)(j)
+      else if (i == j) 0
+      else v(j)(i))
   }
   def tsup(f: Finca, i: Int): Int = {
     f(i)._1
@@ -91,9 +91,9 @@ package object finca
 
 
   def tIR(f: Finca, pi: ProgRiego): TiempolnicioRiego = {
-      def acumulado(v: Vector[Int]): Vector[Int] ={
-        v.scanLeft(0)(_+_).zip(pi).sortBy(_._2).map(x=> x._1)
-      }
+    def acumulado(v: Vector[Int]): Vector[Int] ={
+      v.scanLeft(0)(_+_).zip(pi).sortBy(_._2).map(x=> x._1)
+    }
 
     val tiemposRiego = Vector.tabulate(pi.length-1)(i => treg(f, pi(i)))
     acumulado(tiemposRiego)
@@ -120,21 +120,13 @@ package object finca
     {
       (for (x <- ini until fin) yield costoRiegoTablon(x, f, pi)).foldLeft(0)((x, y) => x + y)
     }
-
     val n = f.length
-    if(n >= 40)
-    {
       val mitad = n / 2
       val unCuarto = mitad/ 2
       val tresCuartos = mitad + unCuarto
 
       val valores = parallel(calcularRiegoAux(0, unCuarto), calcularRiegoAux(unCuarto, mitad), calcularRiegoAux(mitad, tresCuartos), calcularRiegoAux(tresCuartos, n))
       valores._1 + valores._2 + valores._3 + valores._4
-    }
-    else
-    {
-      costoRiegoFinca(f,pi)
-    }
   }
 
   def costoMovilidad(f: Finca, pi: ProgRiego, d: Distancia): Int = {
@@ -145,23 +137,16 @@ package object finca
     def calcularMovilidadAux(ini: Int, fin: Int): Int = {
       (for (x <- ini until fin) yield d(pi(x))(pi(x + 1))).foldLeft(0)((x, y) => x + y)
     }
-
     val n = f.length
-    if (n >= 840) {
       val mitad = n / 2
       val unCuarto = mitad/ 2
       val tresCuartos = mitad + unCuarto
 
       val valores = parallel(calcularMovilidadAux(0, unCuarto), calcularMovilidadAux(unCuarto, mitad), calcularMovilidadAux(mitad, tresCuartos), calcularMovilidadAux(tresCuartos, n-1))
       valores._1 + valores._2 + valores._3 + valores._4
-    }
-    else
-    {
-      costoMovilidad(f, pi, d)
-    }
   }
 
-   def generarProgramacionesRiego(f: Finca): Vector[ProgRiego] = {
+  def generarProgramacionesRiego(f: Finca): Vector[ProgRiego] = {
     def esProgramacionValida(programacion: ProgRiego, f: Finca): Boolean = {
       val tiemposRiego = tIR(f, programacion)
 
@@ -221,7 +206,7 @@ package object finca
     generarProgramacionesRiegoRecursivos(indicesTablones)
   }
 
-  def ProgramacionRiegoOptimo(f: Finca, d: Distancia): (ProgRiego, Int) = {
+  def programacionRiegoOptimo(f: Finca, d: Distancia): (ProgRiego, Int) = {
     val programaciones = generarProgramacionesRiego(f)
     val costoProgramaciones = programaciones.map { pi =>
       val costoRiego = costoRiegoFinca(f, pi)
@@ -231,21 +216,14 @@ package object finca
     costoProgramaciones.minBy(_._2)
   }
 
-  def ProgramacionRiegoOptimoPar(f: Finca, d: Distancia): (ProgRiego, Int) =
+  def programacionRiegoOptimoPar(f: Finca, d: Distancia): (ProgRiego, Int) =
   {
-    if (f.length > 4)
-    {
-      val programaciones = generarProgramacionesRiegoPar(f)
-      val costoProgramaciones = programaciones.par.map { pi =>
-        val costoRiego = costoRiegoFinca(f, pi)
-        val costoMov = costoMovilidad(f, pi, d)
-        (pi, costoRiego + costoMov)
-      }
-      costoProgramaciones.minBy(_._2)
+    val programaciones = generarProgramacionesRiegoPar(f)
+    val costoProgramaciones = programaciones.par.map { pi =>
+      val costoRiego = costoRiegoFinca(f, pi)
+      val costoMov = costoMovilidad(f, pi, d)
+      (pi, costoRiego + costoMov)
     }
-    else
-    {
-      ProgramacionRiegoOptimo(f, d)
-    }
+    costoProgramaciones.minBy(_._2)
   }
 }
