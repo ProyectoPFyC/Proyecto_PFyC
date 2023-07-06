@@ -125,7 +125,9 @@ package object finca
       val unCuarto = mitad/ 2
       val tresCuartos = mitad + unCuarto
 
-      val valores = parallel(calcularRiegoAux(0, unCuarto), calcularRiegoAux(unCuarto, mitad), calcularRiegoAux(mitad, tresCuartos), calcularRiegoAux(tresCuartos, n))
+      val valores = parallel(calcularRiegoAux(0, unCuarto), calcularRiegoAux(unCuarto, mitad),
+        calcularRiegoAux(mitad, tresCuartos), calcularRiegoAux(tresCuartos, n))
+
       valores._1 + valores._2 + valores._3 + valores._4
   }
 
@@ -149,11 +151,8 @@ package object finca
   def generarProgramacionesRiego(f: Finca): Vector[ProgRiego] = {
     def esProgramacionValida(programacion: ProgRiego, f: Finca): Boolean = {
       val tiemposRiego = tIR(f, programacion)
-
       val condicion1 = tiemposRiego.distinct.length == tiemposRiego.length
-      val condicion2 = tiemposRiego.zip(programacion).foldLeft(0)((acc, pair) => acc + treg(f, pair._2)) >= tiemposRiego.max
-
-      condicion1 && condicion2
+      condicion1
     }
 
     val indicesTablones = f.indices.toVector
@@ -179,11 +178,8 @@ package object finca
   def generarProgramacionesRiegoPar(f: Finca): Vector[ProgRiego] = {
     def esProgramacionValida(programacion: ProgRiego, f: Finca): Boolean = {
       val tiemposRiego = tIR(f, programacion)
-
       val condicion1 = tiemposRiego.distinct.length == tiemposRiego.length
-      val condicion2 = tiemposRiego.zip(programacion).foldLeft(0)((acc, pair) => acc + treg(f, pair._2)) >= tiemposRiego.max
-
-      condicion1 && condicion2
+      condicion1
     }
 
     val indicesTablones = f.indices.toList
