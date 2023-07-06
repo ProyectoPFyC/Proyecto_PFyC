@@ -30,7 +30,7 @@ val distancia2 = Vector(Vector(0, 14, 15, 22, 11, 17, 3, 9), Vector(23, 0, 18, 1
 //Pruebas tIR
 
 val tIR1 = tIR(finca1, riego1)
-
+tIR1.length
 //Pruebas costoRiegoTablon
 
 val tCRT1 = costoRiegoTablon(500, finca1, riego1)
@@ -49,11 +49,12 @@ val tCM1 = costoMovilidad(finca1, riego1 , distancia1)
 
 //Pruebas generarProgramacionesRiego
 val gPR1 = generarProgramacionesRiego(finca2)
-gPR1.length
+gPR1.length // se espera un resultado de 8! = 40320
 
 //Pruebas programacionRiegoOptimo
 
 val pRO = programacionRiegoOptimo(finca2, distancia2)
+//se espera como resultado una tupla (Vector(1, 4, 0, 7, 5, 6, 2, 3),151)
 
 /**
  *            3
@@ -63,18 +64,6 @@ val pRO = programacionRiegoOptimo(finca2, distancia2)
 
 val tCRF1Par = costoRiegoFincaPar(finca1, riego1)
 
-//Pruebas costoMovilidadPar
-
-val tCM1Par = costoMovilidadPar(finca1, riego1, distancia1)
-
-//Pruebas generarProgramacionesRiegoPar
-val gPR1Par = generarProgramacionesRiegoPar(finca2)
-gPR1Par.length
-
-//Pruebas programacionRiegoOptimoPar
-
-val pRO = programacionRiegoOptimoPar(finca2, distancia2)
-
 //tiempos costoRiegoFinca
 standardConfig measure {
   costoRiegoFinca(finca1, riego1)
@@ -82,6 +71,10 @@ standardConfig measure {
 standardConfig measure {
   costoRiegoFincaPar(finca1, riego1)
 }
+
+//Pruebas costoMovilidadPar
+
+val tCM1Par = costoMovilidadPar(finca1, riego1, distancia1)
 
 //tiempos costoMovilidad
 standardConfig measure {
@@ -91,6 +84,10 @@ standardConfig measure {
   costoMovilidadPar(finca1, riego1, distancia1)
 }
 
+//Pruebas generarProgramacionesRiegoPar
+val gPR1Par = generarProgramacionesRiegoPar(finca2)
+gPR1Par.length
+
 //tiempos generarProgramacionesRiego
 standardConfig measure {
   generarProgramacionesRiego(finca2)
@@ -99,6 +96,10 @@ standardConfig measure {
   generarProgramacionesRiegoPar(finca2)
 }
 
+//Pruebas programacionRiegoOptimoPar
+
+val pRO = programacionRiegoOptimoPar(finca2, distancia2)
+
 //tiempos programacionRiegoOptimo
 standardConfig measure {
   programacionRiegoOptimo(finca2, distancia2)
@@ -106,4 +107,9 @@ standardConfig measure {
 standardConfig measure {
   programacionRiegoOptimoPar(finca2, distancia2)
 }
+
+
+
+
+
 
