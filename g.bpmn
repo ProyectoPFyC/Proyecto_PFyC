@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             id="Definitions_1"
+             targetNamespace="http://bpmn.io/schema/bpmn"
+             exporter="Camunda Modeler"
+             exporterVersion="4.6.0">
+  <process id="Process_1" isExecutable="false">
+    <startEvent id="StartEvent_1">
+      <outgoing>SequenceFlow_1</outgoing>
+    </startEvent>
+    <userTask id="Task_0ztc0lo">
+      <incoming>SequenceFlow_1</incoming>
+      <outgoing>SequenceFlow_0nxdxz5</outgoing>
+    </userTask>
+    <userTask id="Task_1u61gd0">
+      <incoming>SequenceFlow_0nxdxz5</incoming>
+      <outgoing>SequenceFlow_0euvv4m</outgoing>
+    </userTask>
+    <userTask id="Task_1vmfb8s">
+      <incoming>SequenceFlow_0euvv4m</incoming>
+      <outgoing>SequenceFlow_11yikv5</outgoing>
+    </userTask>
+    <userTask id="Task_1lhcr27">
+      <incoming>SequenceFlow_11yikv5</incoming>
+      <outgoing>SequenceFlow_0q0hmrf</outgoing>
+    </userTask>
+    <userTask id="Task_04ch3lh">
+      <incoming>SequenceFlow_0q0hmrf</incoming>
+      <outgoing>SequenceFlow_14rv2om</outgoing>
+    </userTask>
+    <userTask id="Task_08m14h5">
+      <incoming>SequenceFlow_14rv2om</incoming>
+      <outgoing>SequenceFlow_0d6r3i0</outgoing>
+    </userTask>
+    <userTask id="Task_1ry6vp5">
+      <incoming>SequenceFlow_0d6r3i0</incoming>
+      <outgoing>SequenceFlow_1a7a5y0</outgoing>
+    </userTask>
+    <userTask id="Task_0mvtmz2">
+      <incoming>SequenceFlow_1a7a5y0</incoming>
+      <outgoing>SequenceFlow_1s1ud2b</outgoing>
+    </userTask>
+    <userTask id="Task_09mqumt">
+      <incoming>SequenceFlow_1s1ud2b</incoming>
+      <outgoing>SequenceFlow_0j7r2gh</outgoing>
+    </userTask>
+    <userTask id="Task_0wt0kgh">
+      <incoming>SequenceFlow_0j7r2gh</incoming>
+      <outgoing>SequenceFlow_0fbt0i1</outgoing>
+    </userTask>
+    <userTask id="Task_1xkbfnu">
+      <incoming>SequenceFlow_0fbt0i1</incoming>
+      <outgoing>SequenceFlow_09ojzv2</outgoing>
+    </userTask>
+    <userTask id="Task_11zxjns">
+      <incoming>SequenceFlow_09ojzv2</incoming>
+      <outgoing>SequenceFlow_0sf91df</outgoing>
+    </userTask>
+    <userTask id="Task_1abto05">
+      <incoming>SequenceFlow_0sf91df</incoming>
+      <outgoing>SequenceFlow_1xwmswa</outgoing>
+    </userTask>
+    <userTask id="Task_0pk5l6b">
+      <incoming>SequenceFlow_1xwmswa</incoming>
+      <outgoing>SequenceFlow_0skmkez</outgoing>
+    </userTask>
+    <userTask id="Task_1dv5g1y">
+      <incoming>SequenceFlow_0skmkez</incoming>
+      <outgoing>SequenceFlow_1lnsfbn</outgoing>
+    </userTask>
+    <endEvent id="EndEvent_0b3jqmu">
+      <incoming>SequenceFlow_1lnsfbn</incoming>
+    </endEvent>
+    <sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="Task_0ztc0lo"/>
+    <sequenceFlow id="SequenceFlow_0nxdxz5" sourceRef="Task_0ztc0lo" targetRef="Task_1u61gd0"/>
+    <sequenceFlow id="SequenceFlow_0euvv4m" sourceRef="Task_1u61gd0" targetRef="Task_1vmfb8s"/>
+    <sequenceFlow id="SequenceFlow_11yikv5" sourceRef="Task_1vmfb8s" targetRef="Task_1lhcr27"/>
+    <sequenceFlow id="SequenceFlow_0q0hmrf" sourceRef="Task_1lhcr27" targetRef="Task_04ch3lh"/>
+    <sequenceFlow id="SequenceFlow_14rv2om" sourceRef="Task_04ch3lh" targetRef="Task_08m14h5"/>
+    <sequenceFlow id="SequenceFlow_0d6r3i0" sourceRef="Task_08m14h5" targetRef="Task_1ry6vp5"/>
+    <sequenceFlow id="SequenceFlow_1a7a5y0" sourceRef="Task_1ry6vp5" targetRef="Task_0mvtmz2"/>
+    <sequenceFlow id="SequenceFlow_1s1ud2b" sourceRef="Task_0mvtmz2" targetRef="Task_09mqumt"/>
+    <sequenceFlow id="SequenceFlow_0j7r2gh" sourceRef="Task_09mqumt" targetRef="Task_0wt0kgh"/>
+    <sequenceFlow id="SequenceFlow_0fbt0i1" sourceRef="Task_0wt0kgh" targetRef="Task_1xkbfnu"/>
+    <sequenceFlow id="SequenceFlow_09ojzv2" sourceRef="Task_1xkbfnu" targetRef="Task_11zxjns"/>
+    <sequenceFlow id="SequenceFlow_0sf91df" sourceRef="Task_11zxjns" targetRef="Task_1abto05"/>
+    <sequenceFlow id="SequenceFlow_1xwmswa" sourceRef="Task_1abto05" targetRef="Task_0pk5l6b"/>
+    <sequenceFlow id="SequenceFlow_0skmkez" sourceRef="Task_0pk5l6b" targetRef="Task_1dv5g1y"/>
+    <sequenceFlow id="SequenceFlow_1lnsfbn" sourceRef="Task_1dv5g1y" targetRef="EndEvent_0b3jqmu"/>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="102" width="36" height="36"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="146" y="138" width="88" height="27"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <!-- Resto de los elementos aquí... -->
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
+
+
